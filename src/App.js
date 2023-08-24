@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './component/Header';
+import Sidebar from './component/Sidebar';
+import Home from "./component/Home";
+import Addcontact from './component/Addcontact';
+import Editcontact from './component/Editcontact';
+import Chartsmap from './component/Chartsmap';
+import CovidGraph from './component/CovidGraph';
+
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <Router>
+    <div className='App'>
+        <ToastContainer />
+      <Header />
+      <div className='flex'>
+      <Sidebar />
+        <Routes>
+        <Route exact path="/" element={<Home/>} />
+        <Route  path="/add" element={<Addcontact/>} /> 
+        <Route  path="/edit/:id" element={<Editcontact />} />
+        <Route  path="/map" element={<Chartsmap />}/>
+        </Routes>
+      </div>
     </div>
+  </Router>
+  <div className='w-[100%] h-[70vh]'>
+    <CovidGraph />
+  </div>
+  </>
   );
 }
 
